@@ -49,12 +49,8 @@ function init()
 
 function initGeometry()
 {
-    var ambientLight = new THREE.AmbientLight(0x040404);
-    scene.add(ambientLight);
-
-    var hemisphereLight =  new THREE.HemisphereLight(0x00ffff, 0x00ffff, 1.4);
-    scene.add(hemisphereLight);
-
+    let height = 100.0, width = 100.0, rows = 100, cols = 100;
+	
     var directionalLight =  new THREE.DirectionalLight(0xff00ff, 2.5)
     directionalLight.position.set( 0, height / 3, -height );
     scene.add(directionalLight);
