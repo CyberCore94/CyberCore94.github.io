@@ -50,7 +50,10 @@ function init()
 function initGeometry()
 {
     let height = 500, width = 500, rows = 500, cols = 500;
-	
+    var ground = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshPhongMaterial({color: 0x0f0f0f, shininess: 10}));
+    ground.translateY(-0.01);
+    ground.rotateX(4.71239);
+    scene.add(ground);
     var imagePrefix = "images/";
 	var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
 	var imageSuffix = ".png";
