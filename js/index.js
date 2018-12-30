@@ -50,10 +50,6 @@ function init()
 function initGeometry()
 {
     let height = 100.0, width = 100.0, rows = 100, cols = 100;
-    var grid = gridGeometry(height, width, rows, cols, 0xff00aa);
-    grid.matrix.setPosition(new THREE.Vector3(-width / 2.0, 0.0,-height / 2.0));
-    grid.matrixAutoUpdate = false;
-    scene.add(grid);
 
     var ground = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshPhongMaterial({color: 0x0f0f0f, shininess: 10}));
     ground.translateY(-0.01);
