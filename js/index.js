@@ -50,7 +50,22 @@ function init()
 function initGeometry()
 {
     let height = 100.0, width = 100.0, rows = 100, cols = 100;
-	
+    var grid = gridGeometry(height, width, rows, cols, 0xff00aa);
+    grid.matrix.setPosition(new THREE.Vector3(-width / 2.0, 0.0,-height / 2.0));
+    grid.matrixAutoUpdate = false;
+    scene.add(grid);
+
+    var ground = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshPhongMaterial({color: 0x0f0f0f, shininess: 10}));
+    ground.translateY(-0.01);
+    ground.rotateX(4.71239);
+    scene.add(ground);
+
+    var ambientLight = new THREE.AmbientLight(0x040404);
+    scene.add(ambientLight);
+
+    var hemisphereLight =  new THREE.HemisphereLight(0x00ffff, 0x00ffff, 1.4);
+    scene.add(hemisphereLight);
+
     var directionalLight =  new THREE.DirectionalLight(0xff00ff, 2.5)
     directionalLight.position.set( 0, height / 3, -height );
     scene.add(directionalLight);
@@ -71,6 +86,42 @@ function initGeometry()
     skyBox.translateY(-height/100.0);
 	scene.add( skyBox );
 
+}
+
+function gridGeometry(height, width, rows, cols, color)
+{
+    var grid_geometry = new THREE.BufferGeometry();
+    var vertices = new Float32Array(6*(rows + cols + 2)); //Perimeter
+
+    var index = 0;
+    for(let row = 0; row <= rows; row++)
+    {
+        //Left edge
+        vertices[index++] = 0.0;
+        vertices[index++] = 0.0;
+        vertices[index++] = height - row*(height / rows);
+        
+        //Right edge
+        vertices[index++] = width;
+        vertices[index++] = 0.0;
+        vertices[index++] = height - row*(height / rows);
+    }
+    for(let col = 0; col <= cols; col++)
+    {
+        //Top
+        vertices[index++] = width - col*(width / cols);
+        vertices[index++] = 0.0;
+        vertices[index++] = 0.0;
+
+        //Bottom
+        vertices[index++] = width - col*(width / cols);
+        vertices[index++] = 0.0;
+        vertices[index++] = height;
+    }
+
+    grid_geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+    return new THREE.LineSegments(grid_geometry, new THREE.LineBasicMaterial( { color: color , linewidth: 5} ));
 }
 
 function animate()
