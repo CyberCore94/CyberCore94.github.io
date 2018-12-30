@@ -49,7 +49,7 @@ function init()
 
 function initGeometry()
 {
-    let height = 100.0, width = 100.0, rows = 100, cols = 100;
+    let height = 500, width = 500, rows = 500, cols = 500;
 	
     var imagePrefix = "images/";
 	var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
