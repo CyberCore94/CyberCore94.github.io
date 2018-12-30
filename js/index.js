@@ -78,42 +78,6 @@ function initGeometry()
 
 }
 
-function gridGeometry(height, width, rows, cols, color)
-{
-    var grid_geometry = new THREE.BufferGeometry();
-    var vertices = new Float32Array(6*(rows + cols + 2)); //Perimeter
-
-    var index = 0;
-    for(let row = 0; row <= rows; row++)
-    {
-        //Left edge
-        vertices[index++] = 0.0;
-        vertices[index++] = 0.0;
-        vertices[index++] = height - row*(height / rows);
-        
-        //Right edge
-        vertices[index++] = width;
-        vertices[index++] = 0.0;
-        vertices[index++] = height - row*(height / rows);
-    }
-    for(let col = 0; col <= cols; col++)
-    {
-        //Top
-        vertices[index++] = width - col*(width / cols);
-        vertices[index++] = 0.0;
-        vertices[index++] = 0.0;
-
-        //Bottom
-        vertices[index++] = width - col*(width / cols);
-        vertices[index++] = 0.0;
-        vertices[index++] = height;
-    }
-
-    grid_geometry.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
-
-    return new THREE.LineSegments(grid_geometry, new THREE.LineBasicMaterial( { color: color , linewidth: 5} ));
-}
-
 function animate()
 {
     requestAnimationFrame(animate);
