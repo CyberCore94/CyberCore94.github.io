@@ -59,17 +59,7 @@ function initGeometry()
     ground.translateY(-0.01);
     ground.rotateX(4.71239);
     scene.add(ground);
-
-    var ambientLight = new THREE.AmbientLight(0x040404);
-    scene.add(ambientLight);
-
-    var hemisphereLight =  new THREE.HemisphereLight(0x00ffff, 0x00ffff, 1.4);
-    scene.add(hemisphereLight);
-
-    var directionalLight =  new THREE.DirectionalLight(0xff00ff, 2.5)
-    directionalLight.position.set( 0, height / 3, -height );
-    scene.add(directionalLight);
-
+	
     var imagePrefix = "images/";
 	var directions  = ["xpos", "xneg", "ypos", "yneg", "zpos", "zneg"];
 	var imageSuffix = ".png";
